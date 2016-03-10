@@ -3,5 +3,12 @@
 <html>
 <body>
 <h1>hello! {{ title }} </h1>
+{% for obj in obj_list %}
+{{obj.id}}<br>
+{{obj.title}}<br>
+{{obj.content}}<br>
+{{obj.timestamp}}<br>
+{{obj.updated}}<br>
+{% endfor %}
 </body>
 </html>
