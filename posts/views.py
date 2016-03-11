@@ -3,10 +3,24 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from .models import Post
+from .forms import PostForm
 
 def posts_create(request):
-
-	return HttpResponse("<h1>posts_create<h1>")
+	# if not request.user.is_staff or not request.user.is_superuser:
+		# raise Http404
+		
+	form = PostForm(request.POST or None, request.FILES or None)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.user = request.user
+		instance.save()
+		# message success
+		# messages.success(request, "Successfully Created")
+		# return HttpResponseRedirect(instance.get_absolute_url())
+	context = {
+		"form": form,
+	}
+	return render(request, "post_form.html", context)
 
 def posts_detail(request, id=None):
 	instance = get_object_or_404(Post, id=id)

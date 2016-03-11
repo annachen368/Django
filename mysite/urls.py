@@ -21,5 +21,5 @@ urlpatterns = [
     # url(r'^$', 'excuse.views.home'),
     url(r'^polls/', include('polls.urls')),
     # url(r'^posts/$', "posts.views.posts_home"),
-    url(r'^posts/', include('posts.urls')),
+    url(r'^posts/', include('posts.urls',namespace='posts')),
 ]
